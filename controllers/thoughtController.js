@@ -11,9 +11,11 @@ module.exports = {
         }
     },
 
-    find: async function (req, res) {
+    findSingleThought: async function (req, res) {
         try {
-            const thought = await Thought.findById()
+            const thought = await Thought.findById({
+                    _id: req.params.id
+                })
             res.json(thought)
         } catch(err) {
             res.status(500).json(err)

@@ -11,6 +11,17 @@ module.exports = {
         }
     },
     //TODO find: a single user by id
+    getSingleUser: async function (req, res) {
+        try {
+            const user = await User.findById({
+                _id: req.params.id
+            })
+            .select('-v')
+            res.json(user)
+        } catch(err) {
+            res.status(500).json(err)
+        }
+    },
 
     create: async function (req, res) {
         try {

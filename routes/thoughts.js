@@ -3,7 +3,7 @@ const thoughtController = require('../controllers/thoughtController')
 
 router.get('/', thoughtController.find)
 
-router.get('/find/:id', thoughtController.find)
+router.get('/find/:id', thoughtController.findSingleThought)
 
 router.post('/', thoughtController.createThought)
 

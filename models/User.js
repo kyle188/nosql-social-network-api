@@ -18,10 +18,10 @@ const UserSchema = new mongoose.Schema({
         ref: 'Thought'
     },
     ],
-    friends: {
+    friends: [{
         type: mongoose.Types.ObjectId,
         ref: 'User'
-    },
+    }],
 })
 
 UserSchema.virtual('friendCount')

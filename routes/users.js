@@ -3,6 +3,8 @@ const userController = require('../controllers/userController')
 
 router.get('/', userController.find);
 
+router.get('/:id', userController.getSingleUser);
+
 router.post('/', userController.create);
 
 router.put('/update/:id', userController.update);

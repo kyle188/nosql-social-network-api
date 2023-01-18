@@ -31,20 +31,30 @@ module.exports = {
             res.status(500).json(err)
         }
     },
-
-    update: async function (req, res) {
+    
+    updateUser: async function (req, res) {
         try {
-            const result = await User.findByIdAndUpdate(req.params.id,
-                req.body, { new: true })
-                res.json(result)
+          const result = await User.findOneAndUpdate(
+            { _id: req.params.userId },
+            {
+              $set: req.body,
+            },
+            {
+              runValidators: true,
+              new: true,
+            }
+          )
+          res.json(result)
         } catch(err) {
-            res.status(500).json(err)
+          res.status(500).json(err)
         }
-    },
+      },
 
-    delete: async function (req, res) {
+    deleteUser: async function (req, res) {
         try {
-            const result = await User.findByIdAndDelete(req.params.id)
+            const result = await User.findByIdAndDelete({
+                _id: req.params.id
+            })
             res.json(result)
         } catch(err) {
             res.status(500).json(err)
@@ -59,14 +69,4 @@ module.exports = {
             res.status(500).json(err)
         }
     },
-
-    deleteUser: async function (req, res) {
-        try {
-            const result = await User.findByIdAndDelete(req.params.id)
-            res.json(result)
-        } catch(err) {
-            res.status(500).json(err)
-        }
-    }
-
 }

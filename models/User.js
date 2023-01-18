@@ -22,7 +22,14 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User'
     }],
-})
+},
+{
+    toJSON: {
+      virtuals: true,
+    },
+    timestamps: true
+  
+  })
 
 UserSchema.virtual('friendCount')
 .get(function() {

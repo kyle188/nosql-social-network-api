@@ -47,7 +47,7 @@ const ThoughtSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    reactions: [reactionSchema]
+    reactions: [ReactionSchema]
 })
 
 ThoughtSchema.virtual('reactionCount')

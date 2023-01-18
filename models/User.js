@@ -14,12 +14,12 @@ const UserSchema = new mongoose.Schema({
         match: [/.+@.+\..+/, 'Please fill a valid email address']
     },
     thoughts: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'Thought'
     },
     ],
     friends: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'User'
     },
 })

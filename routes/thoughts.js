@@ -3,7 +3,7 @@ const thoughtController = require('../controllers/thoughtController')
 
 router.get('/', thoughtController.find)
 
-router.get('/find/:id', thoughtController.findSingleThought)
+router.get('/:id', thoughtController.findSingleThought)
 
 router.post('/', thoughtController.createThought)
 
@@ -11,7 +11,7 @@ router.put('/update/:id', thoughtController.update)
 
 router.delete('/delete/:id', thoughtController.delete)
 
-router.post('/:thoughtId/reactions', thoughtController.createReaction)
+// router.post('/:thoughtId/reactions', thoughtController.createReaction)
 
 router.delete('/:thoughtId/reactions/:reactionId', thoughtController.delete)
 

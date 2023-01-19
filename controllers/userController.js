@@ -2,7 +2,7 @@ const { User } = require('../models')
 
 module.exports = {
 
-    find: async function (req, res) {
+    findUsers: async function (req, res) {
         try {
             const user = await User.find()
             res.json(user)
@@ -23,7 +23,7 @@ module.exports = {
         }
     },
 
-    create: async function (req, res) {
+    createUser: async function (req, res) {
         try {
             const result = await User.create(req.body)
             res.json(result)
@@ -31,7 +31,7 @@ module.exports = {
             res.status(500).json(err)
         }
     },
-    
+
     updateUser: async function (req, res) {
         try {
           const result = await User.findOneAndUpdate(
@@ -64,6 +64,16 @@ module.exports = {
     addFriend: async function (req, res) {
         try {
             const result = await User.findByIdAndUpdate(req.params.id)
+            res.json(result)
+        } catch(err) {
+            res.status(500).json(err)
+        }
+    },
+
+    deleteFriend: async function (req, res) {
+        try {
+            const result = await User.findByIdAndDelete(req.params.id,
+                )
             res.json(result)
         } catch(err) {
             res.status(500).json(err)

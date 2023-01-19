@@ -13,7 +13,8 @@ const ReactionSchema = new mongoose.Schema({
     },
     userName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     createdAt: {
         type: Date,
@@ -34,7 +35,7 @@ const ReactionSchema = new mongoose.Schema({
 const ThoughtSchema = new mongoose.Schema({
     thoughtText: {
         type: String,
-        required: true,
+        required: "A Thought Is Required",
         minlength: 1,
         maxlength: 280
     },
@@ -43,12 +44,23 @@ const ThoughtSchema = new mongoose.Schema({
         default: Date.now,
         get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at} hh:mm a')
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     userName: {
         type: String,
-        required: true
+        required: "Must Enter a userName"
     },
     reactions: [ReactionSchema]
-})
+}, 
+{
+    toJSON: {
+        getters: true
+    },
+    timestamps: true
+}
+)
 
 ThoughtSchema.virtual('reactionCount')
 .get(function() {

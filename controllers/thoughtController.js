@@ -1,4 +1,4 @@
-const { Thought } = require('../models')
+const { Thought, User } = require('../models')
 
 module.exports = {
 
@@ -16,6 +16,7 @@ module.exports = {
             const thought = await Thought.findById({
                     _id: req.params.id
                 })
+                .select('-v')
             res.json(thought)
         } catch(err) {
             res.status(500).json(err)
@@ -23,7 +24,6 @@ module.exports = {
     },
 
     //POST to create a new thought(remember to push the created thoughts _id to the associated user's thoughts array field)
-
     createThought: async function (req, res) {
         try {
             const result = await Thought.create(req.body)
@@ -32,6 +32,19 @@ module.exports = {
             res.status(500).json(err)
         }
     },
+    // createThought: async function (req, res) {
+    //     try {
+    //         const result = await Thought.create(req.body)
+    //         await User.findByIdAndUpdate(
+    //             { _id: req.body.userId },
+    //             { $push: { thoughts:
+    //             result.id }}
+    //         )
+    //         res.json(result)
+    //     } catch(err) {
+    //         res.status(500).json(err)
+    //     }
+    // },
     //PUT to update a thought by its _id
 
     update: async function (req, res) {
@@ -57,14 +70,20 @@ module.exports = {
 
     // POST to create a reaction stored in a single thought's array field
 
-    createReaction: async function (req, res) {
-        try {
-            const result = await Thought.create(req.body)
-            res.json(result)
-        } catch(err) {
-            res.status(500).json(err)
-        }
-    },
+    // createReaction:(req, res) {
+    //     Thought.findByIdAndUpdate(req.params.id, { $push: {reactions: req.body}
+    //     )
+    //     .then
+    // }
+
+    // createReaction: async function (req, res) {
+    //     try {
+    //         const result = await Thought.create(req.body)
+    //         res.json(result)
+    //     } catch(err) {
+    //         res.status(500).json(err)
+    //     }
+    // },
 
     //DELETE to pull and remove a reaction by the reaction's reactionId value
 
